@@ -1,19 +1,18 @@
 # Twitter_Database
-Course project for DBMS. Creating multiple database to store tweets and create search applications.
+Course project for DBMS: Creating multiple databases to store tweets and building search applications.
 
-Data collection: We have collected the data using the keyword “US Economy”. We have about
-29000 tweets.
+Data collection: We have collected the data using the keyword “US Economy”. We have about 29000 tweets.
 
-Preprocessing of the data: The downloaded data is a JSON file which is a dictionary of
+Data Preprocessing: The downloaded data is a JSON file which is a dictionary of
 dictionaries. We loaded the data and converted it into a pandas DataFrame. We separated the
 ‘user’ data from it and stored it in another DataFrame. We removed the other language entries
 from our data.
 
 Systems used for Data Storage:
 1. MongoDB
-We are using MongoDB as a NonRelational database for our project. pymongo is a
+We are using MongoDB as a Non-Relational database for our project. PyMongo is a
 python library for interacting with MongoDB database from the python interface. We
-completed the installation of MongoDB and pymongo on our laptop. For the next step,
+completed the installation of MongoDB and PyMongo on our laptop. For the next step,
 we have set up a connection with MongoClient and created a database and a collection
 inside it to store the Twitter data. The data is already in the recommended JSON format
 and is ready to be inserted into the collection. Lastly, we imported our data to MongoDB.
@@ -25,7 +24,7 @@ DataFrame along with ‘tweet_id’. Using SqlAlchemy in Python, we then created
 database in Postgres and stored the ‘user’ DataFrame.
 
 Search Application:
-The search application is divided into three-part. First, Search application for queries
+The search application is divided into three-parts. First, Search application for queries
 based on data in PostgreSQL. Second, Search application for data based in MongoDB.
 Third, Search Application for queries based on the combination of both MongoDB and
 Postgres database. First two we will get the results in the Jupyter notebook environment
