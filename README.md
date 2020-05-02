@@ -22,6 +22,8 @@ We are using Postgres as a Relational database for our project. We converted the
 data JSON file into Pandas DataFrame to extract the ‘user’ information and stored it as a
 DataFrame along with ‘tweet_id’. Using SqlAlchemy in Python, we then created a
 database in Postgres and stored the ‘user’ DataFrame.
+3. Redis:
+We used Redis for the catching
 
 Search Application:
 The search application is divided into three-parts. First, Search application for queries
