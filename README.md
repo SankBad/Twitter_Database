@@ -23,7 +23,8 @@ data JSON file into Pandas DataFrame to extract the ‘user’ information and s
 DataFrame along with ‘tweet_id’. Using SqlAlchemy in Python, we then created a
 database in Postgres and stored the ‘user’ DataFrame.
 3. Redis:
-We used Redis for the catching
+We used Redis for the catching as shown in the below digram.
+![GitHub Logo](/images/Caching.png)
 
 Search Application:
 The search application is divided into three-parts. First, Search application for queries
