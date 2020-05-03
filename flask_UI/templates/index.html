@@ -31,8 +31,6 @@
           <option value="byuid">Search by user id</option>
           <option value="by2words">Search tweets by two keywords</option>
           <option value="tophashtag">Fetch top 10 Hashtags</option>
-          <option value="trump">Number of tweets mentioning Trump</option>
-          <option value="trumpTweet">Display a tweet mentioning Trump</option>
         </select>
       </div>
       <div id="searchDiv" class="form-group col-md-12" style="display: none;">
@@ -170,16 +168,6 @@
                 <li class="h3 text-info">#{{ hashtag }}</li>
             {% endfor %}
             </ol>
-        {% endif%}
-        
-        
-        {%if trump %}
-            <p class="text-center text-info h1">There are total {{ trump }} tweets mentioning President Trump along with US Economy.</p>
-        {% endif%}
-        
-        {%if trumpTweet %}
-            <p class="h1 text-center text-primary">One of the tweets mentioning President Trump</p>
-            <p class="text-center text-info h3">{{ trumpTweet }}</p>
         {% endif%}
     </section>
     

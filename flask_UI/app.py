@@ -167,12 +167,5 @@ def query():
             hc = sorted(hashtag_count, key=hashtag_count.get, reverse=True)
             hc[:10]
             return render_template("index.html", hashtags = hc[:10])
-        elif select == "trump":
-            myquery = {"content":{"$regex":"trump","$options" :'i'}}
-            return render_template("index.html", trump = tweets.count_documents(myquery))
-        elif select == "trumpTweet":
-            myquery = {"content":{"$regex":"trump","$options" :'i'}}
-            twts = list(tweets.find(myquery))
-            return render_template("index.html", trumpTweet = twts[randint(0, len(twts))]["content"])
 if __name__ == "__main__":
     app.run(debug=True)
