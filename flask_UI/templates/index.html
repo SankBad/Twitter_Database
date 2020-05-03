@@ -1,0 +1,194 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/182992221b.js" crossorigin="anonymous"></script>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<title>Twitter Data table</title>
+<body class="container-fluid bg-info">
+<header class="col-md-12">
+  <h1 class="text-center">US Economy Twitter Data</h1>
+  </header>
+  <section style="margin-top: 3%" class="text-center col-md-12">
+      <image height="150" width="150" class="img-responsive center-block" src="https://cdn2.iconfinder.com/data/icons/minimalism/512/twitter.png"/>
+      <br/>
+      <form style="font-size:25px" class="form" action="{{ url_for('query') }}" method="post">
+        <div class="form-group">
+        <select onchange="yesnoCheck(this);" style="background-color: rgba(255,255,255,0.6);" class="col-md-12 text-center" name="select_query">
+          <option value="tweetType">Show number of Original and Retweets</option>
+          <option value="typeOfMedia">Type of media in dataset</option>
+          <option value="distinctUser">Number of distinct user in our database</option>
+          <option value="topRetweet">Tweet with maximum retweet count</option>
+          <option value="topFav">Tweet with maximum favorite count</option>
+          <option value="byWord">Search Tweet by word</option>
+          <option value="byHashtag">Search tweets by hashtag</option>
+          <option value="timeRange">Search by time range</option>
+          <option value="byuname">Search by username</option>
+          <option value="byuid">Search by user id</option>
+          !<option value="by2words">Search tweets by two keywords</option>
+          <option value="tophashtag">Fetch top 10 Hashtags</option>
+          <option value="trump">Number of tweets mentioning Trump</option>
+          <option value="trumpTweet">Display a tweet mentioning Trump</option>
+        </select>
+      </div>
+      <div id="searchDiv" class="form-group col-md-12" style="display: none;">
+      <br>
+        <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-12 text-info" placeholder="Type the word here" type="text" id="searchTerm" name="searchTerm" />
+    </div>
+    
+    <div id="timeDiv" class="form-group col-md-12" style="display: none;">
+      <br>
+        <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-4 text-info" placeholder="Type the word here" type="datetime-local" id="timeRangeStart" name="timeRangeStart" min="2020-04-27T00:00:00" max="2020-04-30T00:00:00"/>
+        <p class="text-center text-info col-md-4">to</p>
+        <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-4 text-info" placeholder="Type the word here" type="datetime-local" id="timeRangeEnd" name="timeRangeEnd" min="2020-04-27T00:00:00" max="2020-04-30T00:00:00"/>
+    </div>
+    
+    
+      <div class="form-group">
+        <input style="margin-top:1%; font-size:25px" type="submit" value="submit" class="btn btn-info"/>
+      </div>
+      </form>
+    </section>
+    <section style="margin-top:2%" class="col-md-12">
+        {% if data%}
+            {{ data | safe}}
+        {% endif %}
+        
+        {%if tweetType %}
+            <p class="text-center text-info h1">Number of Original tweets: {{ tweetType['original'] }} </p>
+            <p class="text-center text-info h1">Number of Retweets: {{ tweetType['retweets'] }} </p>
+        {% endif%}
+        
+        {% if typeOfMedia %}
+            <p class="text-center text-primary h1">Type of tweets: (Images / Text / Both)</p>
+            <ul>
+                <li class="text-info h3">Only Text: {{ typeOfMedia["text"] }}</li>
+                <li class="text-info h3">Only Image: {{ typeOfMedia["image"] }}</li>
+                <li class="text-info h3">Both: {{ typeOfMedia["both"] }}</li>
+            </ul>
+        {% endif %}
+        
+        {% if distinctUser %}
+            <p class="text-center text-info h1">Number of distinct users: {{ distinctUser }} </p>
+        {% endif %}
+        
+        {% if topRetweet %}
+            <p class="text-center text-primary h1">Tweet with maximum retweets</p>
+            <div class="jumbotron text-center text-info bg-primary">
+                <p>Count: {{ topRetweet["retweet_count"]}}</p>
+                <i class="fas fa-quote-left"></i>
+                    {{ topRetweet["content"] }}
+                <i class="fas fa-quote-right"></i>
+                <p class="text-right">- {{ topRetweet["user_name"]}}</p>
+            </div>
+        {% endif %}
+        
+        {% if topFav %}
+            <p class="text-center text-primary h1">Tweet with maximum favorite counts</p>
+            <div class="jumbotron text-center text-info bg-primary">
+                <p>Count: {{ topFav["retweet_count"]}}</p>
+                <i class="fas fa-quote-left"></i>
+                    {{ topFav["content"] }}
+                <i class="fas fa-quote-right"></i>
+                <p class="text-right">- {{ topFav["user_name"]}}</p>
+            </div>
+        {% endif %}
+        
+        {% if byWord %}
+            {% if found %}
+            <p class="text-center text-primary h1">Total {{ count }} tweets containing the word {{ word }}</p>
+            {{ byWord | safe}}
+            {% else %}
+            <p class="text-center text-primary h1">{{ byWord }}</p>
+            {% endif %}
+            
+        {% endif %}
+        
+        {% if byHashtag %}
+            {% if found %}
+            <p class="text-center text-primary h1">Tweets containing {{ hashtag }}</p>    
+            {{ byHashtag | safe}}
+            {% else %}
+            <p class="text-center text-primary h1">{{ byHashtag }}</p>
+            {% endif %}
+        {% endif %}
+        
+        {% if timeRange %}
+            {% if found %}
+            <p class="text-center text-primary h1">Tweets from {{ start}} to {{ end }}</p>
+            {{ timeRange | safe }}
+            {% else %}
+            <p class="text-center text-primary h1">{{ timeRange }}</p>
+            {% endif %}
+        {% endif %}
+        
+        {% if byuname %}    
+            {% if found %}
+            <p class="text-center text-primary h1">tweets by @{{uname}}</p>
+            {{ byuname | safe}}
+            {% else %}
+            <p class="text-center text-primary h1">{{ byuname }}</p>
+            {% endif %}
+        {% endif %}
+        
+        {% if byuid %}
+            {% if found %}
+            <p class="text-center text-primary h1">tweets by @{{uid}}</p>
+            {{ byuid | safe}}
+            {% else %}
+            <p class="text-center text-primary h1">{{ byuid }}</p>
+            {% endif %}
+        {% endif %}
+        
+        {%if hashtags %}
+            <p class="text-center text-primary h1">Top 10 Hashtags used along with US Economy</p>
+            <ol>
+            {% for hashtag in hashtags %}
+                <li class="h3 text-info">#{{ hashtag }}</li>
+            {% endfor %}
+            </ol>
+        {% endif%}
+        
+        
+        {%if trump %}
+            <p class="text-center text-info h1">There are total {{ trump }} tweets mentioning President Trump along with US Economy.</p>
+        {% endif%}
+        
+        {%if trumpTweet %}
+            <p class="h1 text-center text-primary">One of the tweets mentioning President Trump</p>
+            <p class="text-center text-info h3">{{ trumpTweet }}</p>
+        {% endif%}
+    </section>
+    
+<script>
+function yesnoCheck(that) {
+    if (that.value == "byWord" || that.value == "byHashtag" || that.value == "byuname" || that.value == "byuid") {
+        document.getElementById("searchDiv").style.display = "block";
+    } else {
+        document.getElementById("searchDiv").style.display = "none";
+    }
+    
+    
+    // time range
+    if (that.value == "timeRange"){
+        document.getElementById("timeDiv").style.display = "block";
+    }
+    else{
+        document.getElementById("timeDiv").style.display = "none";
+    }
+}
+</script>
+
+<script type="text/javascript">
+   $(function() {
+    $("table").dataTable({
+        "iDisplayLength": 10,
+        "aLengthMenu": [[10, 25, 50, 100,  -1], [10, 25, 50, 100, "All"]]
+       });
+   });
+  </script>
+</body>
