@@ -137,6 +137,22 @@ def query():
                 return render_template("index.html", byuid =  df1.to_html(classes='data', header="true"), uid = searchTerm, found = True)    
             else:
                 return render_template("index.html", byuid = "User id not found", found = False)
+        elif select == "by2words":
+            searchTerm1 = str(request.form["searchTerm1"])
+            searchTerm2 = str(request.form["searchTerm2"])
+            
+            twts = tweets.find( {
+                "$and" : [
+                    {"content":{"$regex":searchTerm1,"$options" :'i'}} , {"content":{"$regex":searchTerm2,"$options" :'i'}}
+                ]
+            } )
+            twts = list(twts)
+            if twts:
+                mydf = pd.DataFrame.from_records(twts)
+                df1 = mydf[['user_id', 'user_name', 'hashtags', 'content', 'created_at', 'retweet_count','FavCount']]
+                return render_template("index.html", by2words =  df1.to_html(classes='data', header="true"), term1 = searchTerm1, term2 = searchTerm2, found = True) 
+            else:
+                 return render_template("index.html", by2words = "No tweets found with given keywords", found = False)
         elif select == "tophashtag":
             hashtag_count = {}
             for tweet in tweets.find():

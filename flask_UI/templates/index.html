@@ -29,7 +29,7 @@
           <option value="timeRange">Search by time range</option>
           <option value="byuname">Search by username</option>
           <option value="byuid">Search by user id</option>
-          !<option value="by2words">Search tweets by two keywords</option>
+          <option value="by2words">Search tweets by two keywords</option>
           <option value="tophashtag">Fetch top 10 Hashtags</option>
           <option value="trump">Number of tweets mentioning Trump</option>
           <option value="trumpTweet">Display a tweet mentioning Trump</option>
@@ -45,6 +45,14 @@
         <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-4 text-info" placeholder="Type the word here" type="datetime-local" id="timeRangeStart" name="timeRangeStart" min="2020-04-27T00:00:00" max="2020-04-30T00:00:00"/>
         <p class="text-center text-info col-md-4">to</p>
         <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-4 text-info" placeholder="Type the word here" type="datetime-local" id="timeRangeEnd" name="timeRangeEnd" min="2020-04-27T00:00:00" max="2020-04-30T00:00:00"/>
+    </div>
+    
+    
+    <div id="2searchDiv" class="form-group col-md-12" style="display: none;">
+      <br>
+        <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-4 text-info" placeholder="Type the first word" type="text" id="searchTerm1" name="searchTerm1" />
+        <p class="text-center text-info col-md-4">AND</p>
+        <input style="border: 0; outline: 0; background: transparent; border-bottom: 1px solid #5bc0de;" class="col-md-4 text-info" placeholder="Type the second word" type="text" id="searchTerm2" name="searchTerm2" />
     </div>
     
     
@@ -144,6 +152,17 @@
             {% endif %}
         {% endif %}
         
+
+        {% if by2words %}
+            {% if found %}
+            <p class="text-center text-primary h1">Tweets with keywords {{ term1 }} and {{ term2 }}</p>
+            {{ by2words | safe}}
+            {% else %}
+            <p class="text-center text-primary h1">{{ by2words }}</p>
+            {% endif %}        
+        {% endif %}
+        
+        
         {%if hashtags %}
             <p class="text-center text-primary h1">Top 10 Hashtags used along with US Economy</p>
             <ol>
@@ -179,6 +198,15 @@ function yesnoCheck(that) {
     }
     else{
         document.getElementById("timeDiv").style.display = "none";
+    }
+    
+    
+    // search by 2 keywords
+    if(that.value == "by2words"){
+        document.getElementById("2searchDiv").style.display = "block";
+    }
+    else {
+        document.getElementById("2searchDiv").style.display = "none";
     }
 }
 </script>
