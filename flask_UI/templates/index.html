@@ -16,21 +16,21 @@
   <section style="margin-top: 3%" class="text-center col-md-12">
       <image height="150" width="150" class="img-responsive center-block" src="https://cdn2.iconfinder.com/data/icons/minimalism/512/twitter.png"/>
       <br/>
-      <form style="font-size:25px" class="form" action="{{ url_for('query') }}" method="post">
+      <form style="font-size:20px" class="form" action="{{ url_for('query') }}" method="post">
         <div class="form-group">
         <select onchange="yesnoCheck(this);" style="background-color: rgba(255,255,255,0.6);" class="col-md-12 text-center" name="select_query">
-          <option value="tweetType">Show number of Original and Retweets</option>
-          <option value="typeOfMedia">Type of media in dataset</option>
-          <option value="distinctUser">Number of distinct user in our database</option>
-          <option value="topRetweet">Tweet with maximum retweet count</option>
-          <option value="topFav">Tweet with maximum favorite count</option>
+          <option value="tophashtag">Fetch top 10 Hashtags</option>
           <option value="byWord">Search Tweet by word</option>
           <option value="byHashtag">Search tweets by hashtag</option>
           <option value="timeRange">Search by time range</option>
           <option value="byuname">Search by username</option>
           <option value="byuid">Search by user id</option>
           <option value="by2words">Search tweets by two keywords</option>
-          <option value="tophashtag">Fetch top 10 Hashtags</option>
+          <option value="tweetType">Show number of Original and Retweets</option>
+          <option value="typeOfMedia">Type of media in dataset</option>
+          <option value="distinctUser">Number of distinct user in our database</option>
+          <option value="topRetweet">Tweet with maximum retweet count</option>
+          <option value="topFav">Tweet with maximum favorite count</option>  
         </select>
       </div>
       <div id="searchDiv" class="form-group col-md-12" style="display: none;">
