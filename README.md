@@ -1,9 +1,9 @@
 # Twitter_Database
 Course project for DBMS: Creating multiple databases to store tweets and building search applications.
 
-Data collection: We have collected the data using the keyword “US Economy”. We have about 29000 tweets.
+Data collection: We have collected the data using the keyword “U.S. Economy”. We have about 16800 tweets.
 
-Data Preprocessing: The downloaded data is a JSON file which is a dictionary of
+Data Preprocessing: The downloaded data is a JSON file which is a dictionary of 
 dictionaries. We loaded the data and converted it into a pandas DataFrame. We separated the
 ‘user’ data from it and stored it in another DataFrame. We removed the other language entries
 from our data.
