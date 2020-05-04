@@ -57,3 +57,7 @@ User Interface web application for the search application: We are planning to us
 flask tools for generating websites for search applications. We already created a basic website
 for running backend python code and showing the basic results (such as addition) on the web
 interface. We need to work on showing the output of the panda’s data frame through the flask
+
+Web User Interface: 
+We used Python flask the micro-web framework for connecting python with the user interface. For the UI we used technologies like Bootstrap, jQuery, and CSS, along with HTML. For passing the dataframe and the variables from the back-end, we used Jinja2. To divide the lengthy table into small chunks of rows per page, we used Data tables plugin. 
+
