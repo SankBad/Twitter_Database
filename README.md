@@ -61,3 +61,24 @@ interface. We need to work on showing the output of the panda’s data frame thr
 Web User Interface: 
 We used Python flask the micro-web framework for connecting python with the user interface. For the UI we used technologies like Bootstrap, jQuery, and CSS, along with HTML. For passing the dataframe and the variables from the back-end, we used Jinja2. To divide the lengthy table into small chunks of rows per page, we used Data tables plugin. 
 
+UI screenshot for few available search options
+![alt text](https://github.com/SankBad/Twitter_Database/blob/master/images/Screenshot%20(683).png)
+
+
+UI screenshot for top 10 hashtags
+![GitHub Logo2](https://github.com/SankBad/Twitter_Database/blob/master/images/hashtag.JPG)
+
+
+UI screenshot for search by hashtags
+![GitHub Logo2](https://github.com/SankBad/Twitter_Database/blob/master/images/search-by-hashtag.JPG)
+
+
+UI screenshot for search by a word
+![GitHub Logo2](https://github.com/SankBad/Twitter_Database/blob/master/images/search-by-word.JPG)
+
+
+UI screenshot for search by two words
+![GitHub Logo2](https://github.com/SankBad/Twitter_Database/blob/master/images/search-two-keywords.JPG)
+
+UI screenshot for search by timerange
+![GitHub Logo2](https://github.com/SankBad/Twitter_Database/blob/master/images/search-time-range.JPG)
